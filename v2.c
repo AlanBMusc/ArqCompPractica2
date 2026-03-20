@@ -4,7 +4,7 @@
 
 #include "counter.h"
 
-#define TOL 1e-10
+#define TOL 1e-5
 #define MAX_ITER 15000
 #define ALIGN 32
 
