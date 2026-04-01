@@ -90,13 +90,13 @@ int main(int argc, char **argv) {
 
             // Parte 1: j < i
             for (j = 0; j <= i - 4; j += 4) {
-                __m256d va = _mm256_load_pd(&Ai[j]);
-                __m256d vx = _mm256_load_pd(&x[j]);
+                __m256d va = _mm256_loadu_pd(&Ai[j]);
+                __m256d vx = _mm256_loadu_pd(&x[j]);
                 vsum = _mm256_add_pd(vsum, _mm256_mul_pd(va, vx));
             }
 
             double temp[4];
-            _mm256_store_pd(temp, vsum);
+            _mm256_storeu_pd(temp, vsum);
             sigma = temp[0] + temp[1] + temp[2] + temp[3];
 
             for (; j < i; j++) {
@@ -107,12 +107,12 @@ int main(int argc, char **argv) {
             vsum = _mm256_setzero_pd();
 
             for (j = i + 1; j <= n - 4; j += 4) {
-                __m256d va = _mm256_load_pd(&Ai[j]);
-                __m256d vx = _mm256_load_pd(&x[j]);
+                __m256d va = _mm256_loadu_pd(&Ai[j]);
+                __m256d vx = _mm256_loadu_pd(&x[j]);
                 vsum = _mm256_add_pd(vsum, _mm256_mul_pd(va, vx));
             }
 
-            _mm256_store_pd(temp, vsum);
+            _mm256_storeu_pd(temp, vsum);
             sigma += temp[0] + temp[1] + temp[2] + temp[3];
 
             for (; j < n; j++) {
